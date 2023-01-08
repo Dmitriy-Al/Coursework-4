@@ -1,8 +1,7 @@
 import jakarta.persistence.*;
 
-
 @Entity
-@Table (name = "table_mountains")
+@Table(name = "table_mountains")
 public class Mountain {
 
     @Id
@@ -12,18 +11,22 @@ public class Mountain {
     @Column(length = 30, unique = true, nullable = false)
     private String title;
 
-    @Column(length = 30, unique = true, nullable = false)
+    @Column(length = 30, unique = true)
     private String country;
 
     @Column(nullable = false)
     private int height;
 
+    @OneToOne(mappedBy = "mountain", fetch = FetchType.EAGER)
+    private AlpinistsGroup alpinistsGroup;
+
 
     //Гора создаётся с названием (не менее 4 символов), страной (не менее 4 символов) и высотой (не менее 100 метров)
-    public Mountain(){}
+    public Mountain() {
+    }
 
     public void setTitle(String title) {
-        if(title.length() >= 4){
+        if (title.length() >= 4) {
             this.title = title;
         } else {
             throw new IllegalArgumentException("Название горы должно быть не менее 4 символов");
@@ -31,7 +34,7 @@ public class Mountain {
     }
 
     public void setCountry(String country) {
-        if(country.length() >= 4){
+        if (country.length() >= 4) {
             this.country = country;
         } else {
             throw new IllegalArgumentException("Название страны должно быть не менее 4 символов");
@@ -39,7 +42,7 @@ public class Mountain {
     }
 
     public void setHeight(int height) {
-        if(height >= 100){
+        if (height >= 100) {
             this.height = height;
         } else {
             throw new IllegalArgumentException("Высота горы должна быть не менее 100 метров");
@@ -65,6 +68,7 @@ public class Mountain {
     public int getHeight() {
         return height;
     }
+
 }
 
 

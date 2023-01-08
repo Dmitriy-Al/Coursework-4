@@ -15,7 +15,7 @@ public class AlpinistDao implements Dao<Alpinist, Integer> {
             System.out.println("Не установить соединение с сервером");
             throw new RuntimeException(e);
         }
-        try (Connection connection = DriverManager.getConnection(Settings.CONNECTION_STRING, Settings.LOGIN, Settings.PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(DbConnectionSettings.CONNECTION_STRING, DbConnectionSettings.LOGIN, DbConnectionSettings.PASSWORD)) {
             try (java.sql.Statement statement = connection.createStatement()) {
                 statement.executeUpdate(create);
                 System.out.println("Таблица создана");
@@ -36,7 +36,7 @@ public class AlpinistDao implements Dao<Alpinist, Integer> {
             System.out.println("org.postgresql.Driver не был загружен");
             throw new RuntimeException(e);
         }
-        try (Connection connection = DriverManager.getConnection(Settings.CONNECTION_STRING, Settings.LOGIN, Settings.PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(DbConnectionSettings.CONNECTION_STRING, DbConnectionSettings.LOGIN, DbConnectionSettings.PASSWORD)) {
             try (PreparedStatement statement = connection.prepareStatement(insert)) {
                 statement.setString(1, alpinist.getName());
                 statement.setInt(2, alpinist.getAge());
@@ -62,7 +62,7 @@ public class AlpinistDao implements Dao<Alpinist, Integer> {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        try (Connection connection = DriverManager.getConnection(Settings.CONNECTION_STRING, Settings.LOGIN, Settings.PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(DbConnectionSettings.CONNECTION_STRING, DbConnectionSettings.LOGIN, DbConnectionSettings.PASSWORD)) {
             try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(select);
                 alpinists = new ArrayList<>();
@@ -94,7 +94,7 @@ public class AlpinistDao implements Dao<Alpinist, Integer> {
             System.out.println("org.postgresql.Driver не был загружен");
             throw new RuntimeException(e);
         }
-        try (Connection connection = DriverManager.getConnection(Settings.CONNECTION_STRING, Settings.LOGIN, Settings.PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(DbConnectionSettings.CONNECTION_STRING, DbConnectionSettings.LOGIN, DbConnectionSettings.PASSWORD)) {
             try (PreparedStatement statement = connection.prepareStatement(select)) {
                 statement.setInt(1, integer);
                 ResultSet resultSet = statement.executeQuery();
@@ -122,7 +122,7 @@ public class AlpinistDao implements Dao<Alpinist, Integer> {
             System.out.println("org.postgresql.Driver не был загружен");
             throw new RuntimeException(e);
         }
-        try (Connection connection = DriverManager.getConnection(Settings.CONNECTION_STRING, Settings.LOGIN, Settings.PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(DbConnectionSettings.CONNECTION_STRING, DbConnectionSettings.LOGIN, DbConnectionSettings.PASSWORD)) {
             try (PreparedStatement statement = connection.prepareStatement(update)) {
                 statement.setString(1, alpinist.getName());
                 statement.executeUpdate();
@@ -133,7 +133,8 @@ public class AlpinistDao implements Dao<Alpinist, Integer> {
         }
     }
 
-    public List<Alpinist> getDeterminedAge() {
+
+    public List<Alpinist> getDeterminedAgeAlpinists() {
         List<Alpinist> alpinists;
         String select = "SELECT alpinist_id, name FROM table_alpinists WHERE age BETWEEN 30 AND 50";
         try {
@@ -141,7 +142,7 @@ public class AlpinistDao implements Dao<Alpinist, Integer> {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        try (Connection connection = DriverManager.getConnection(Settings.CONNECTION_STRING, Settings.LOGIN, Settings.PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(DbConnectionSettings.CONNECTION_STRING, DbConnectionSettings.LOGIN, DbConnectionSettings.PASSWORD)) {
             try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(select);
                 alpinists = new ArrayList<>();
@@ -162,24 +163,4 @@ public class AlpinistDao implements Dao<Alpinist, Integer> {
     }
 
 
-    public static class Settings {
-
-        public static final String CONNECTION_STRING = "jdbc:postgresql://localhost:5432/coursework_db";
-        public static final String LOGIN = "dmitriy";
-        public static final String PASSWORD = "admin";
-
-    }
 }
-/*
-Создать sql файл со следующими запросами:
-создание таблицы Альпинист +
-Добавление данных в таблицу Альпинист +
-Изменение имени альпиниста +
-Получение идентификатором и имен альпинистов старше 30 и младше 50 лет +
-Получение названий гор, высота которых больше указанной
-Получение страны, в которой расположена гора с определенным названием
-Получение идентификаторов, которые совершали восхождения в прошлом
-Получение идентификаторов групп, которые совершали восхождения на гору с определенным названием
-Получение идентификатором и имен альпинистов, которые совершали восхождения на горы, высота которых от ... до ...
-Подключить библиотеку, которая проверяет значения свойств с помощью аннотаций
- */

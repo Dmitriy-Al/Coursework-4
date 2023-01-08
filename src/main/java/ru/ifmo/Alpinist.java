@@ -1,4 +1,5 @@
-
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 
 public class Alpinist {
 
@@ -6,14 +7,11 @@ public class Alpinist {
     private String name;
     private int age;
     private int id;
-    private Alpinist[] alpinists;
+
+    private AlpinistsGroup alp;
 
     //Альпинист создаётся с именем (не менее 3 символов), адресом проживания (не менее 5 символов), возрастом.
     public Alpinist() {
-    }
-
-    public void setAlpinists(Alpinist... alpinist) {
-        alpinists = alpinist;
     }
 
     public void setId(int id) {
@@ -40,8 +38,8 @@ public class Alpinist {
         this.age = age;
     }
 
-    public Alpinist[] getAlpinists() {
-        return alpinists;
+    public void setAlpinistsGroup(AlpinistsGroup alpinistsGroup) {
+        this.alp = alpinistsGroup;
     }
 
     public String getAddress() {
@@ -58,5 +56,16 @@ public class Alpinist {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Alpinist{" +
+                "address='" + address + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", id=" + id +
+                ", alp=" + alp +
+                '}';
     }
 }
