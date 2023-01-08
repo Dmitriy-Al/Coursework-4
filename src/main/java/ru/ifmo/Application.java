@@ -1,8 +1,12 @@
+package ru.ifmo;
+
+import data.AlpinistDao;
 import data.AlpinistGroupDao;
+import data.DbConnectionSettings;
+import data.MountainDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-
 import java.util.List;
 
 public class Application {
@@ -40,7 +44,7 @@ public class Application {
         climber3.setAge(55);
         climber3.setName("Коля");
 
-        //public AlpinistsGroup(int year, int month, int day, int hour, int minute, boolean isRecruit, Mountain mountain, Alpinist... alpinists)
+        //public ru.ifmo.AlpinistsGroup(int year, int month, int day, int hour, int minute, boolean isRecruit, ru.ifmo.Mountain mountain, ru.ifmo.Alpinist... alpinists)
         AlpinistsGroup someAlpinistGroup = new AlpinistsGroup(2023, 2, 15, 17, 30, true, elbrus, climber1, climber2, climber3);
 
         List<Alpinist> alpinistsFromDb = alpinistDao.getInfo();

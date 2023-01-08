@@ -1,9 +1,9 @@
+package ru.ifmo;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
-import data.AlpinistsGroupDao;
 
 @Entity
 @Table(name = "table_group")
@@ -67,7 +67,7 @@ public class AlpinistsGroup {
 
     @Override
     public String toString() {
-        return "AlpinistsGroup{" +
+        return "ru.ifmo.AlpinistsGroup{" +
                 "id=" + id +
                 ", membersCount=" + membersCount +
                 ", mountain=" + mountain +

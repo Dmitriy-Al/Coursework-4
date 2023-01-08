@@ -1,4 +1,5 @@
-import data.Dao;
+package data;
+import ru.ifmo.Alpinist;;
 
 import java.sql.*;
 import java.util.ArrayList;

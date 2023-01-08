@@ -1,5 +1,4 @@
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+package ru.ifmo;
 
 public class Alpinist {
 
@@ -60,7 +59,7 @@ public class Alpinist {
 
     @Override
     public String toString() {
-        return "Alpinist{" +
+        return "ru.ifmo.Alpinist{" +
                 "address='" + address + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +

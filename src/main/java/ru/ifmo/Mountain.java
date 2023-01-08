@@ -1,4 +1,7 @@
+package ru.ifmo;
+
 import jakarta.persistence.*;
+import ru.ifmo.AlpinistsGroup;
 
 @Entity
 @Table(name = "table_mountains")
